@@ -5,72 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-       .slider {
+        .slider {
     width: 100%;
-    max-width: 900px;
+    max-width: 92%;
+    
     position: relative;
     overflow: hidden;
     margin: auto;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    
 }
 
 .slides {
     display: flex;
-    transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1); /* Smooth easing */
+    transition: transform 1s ease-in-out;
 }
 
 .slide {
     min-width: 100%;
     box-sizing: border-box;
     position: relative;
-    opacity: 0.8;
-    transition: opacity 0.5s ease-in-out; /* Fade-in effect */
+    height: 250px;
 }
 
 .slide img {
-    width: 860px;
-    height: 150px;
+    width: 100%;
+    height: 300px;
     border-radius: 10px;
-    filter: brightness(0.9); /* Slightly darkens the image */
-    transition: filter 0.3s ease-in-out;
+    /* object-fit: cover; Ensures image covers the slide area */
+    filter: brightness(0.85);
+    transition: filter 0.5s ease-in-out;
 }
 
 .slide img:hover {
-    filter: brightness(1); /* Brighten on hover */
+    filter: brightness(1); /* Brightens image on hover */
 }
-
-
-.slider-nav {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-    pointer-events: none; /* Prevents blocking the image hover */
-}
-
-.prev, .next {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 15px;
-    cursor: pointer;
-    user-select: none;
-    border-radius: 50%;
-    pointer-events: auto; /* Allow interaction with arrows */
-    transition: background-color 0.3s ease-in-out;
-}
-
-.prev:hover, .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-    transform: scale(1.1); /* Enlarge arrows on hover */
-}
-
-.prev:active, .next:active {
-    transform: scale(0.9); /* Click effect on arrows */
-}
-
     </style>
 </head>
 <body>
@@ -78,52 +48,42 @@
         <div class="slides">
             <!-- Slide 1 -->
             <div class="slide">
-                <a href="#"><img src="images/slider_img4.jpg" alt="Offer 1"></a>
+                <a href="#"><img src="images/slider_img4.jpg" alt="Offer 1" ></a>
                 
             </div>
             <!-- Slide 2 -->
             <div class="slide">
-                <a href="#"><img src="images/slider_img5.jpg" alt="Offer 2"></a>
+                <a href="#"> <img src="images/slider_img5.jpg" alt="Offer 2"></a>
                 
             </div>
             <!-- Slide 3 -->
             <div class="slide">
                 <a href="#"><img src="images/slider_img6.jpg" alt="Offer 3"></a>
-                
+               
             </div>
         </div>
-    
-        <!-- Navigation Arrows -->
-        <div class="slider-nav">
-            <span class="prev">&#10094;</span>
-            <span class="next">&#10095;</span>
-        </div>
     </div>
-<script>
-    const slides = document.querySelector('.slides');
+    
+    
+    <script>
+const slides = document.querySelector('.slides');
 const slideCount = document.querySelectorAll('.slide').length;
 let currentIndex = 0;
-
-document.querySelector('.next').addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % slideCount;
-    updateSlider();
-});
-
-document.querySelector('.prev').addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + slideCount) % slideCount;
-    updateSlider();
-});
 
 function updateSlider() {
     slides.style.transform = `translateX(-${currentIndex * 100}%)`;
 }
 
-// Optional: Auto-slide every 3 seconds
-setInterval(() => {
-    currentIndex = (currentIndex + 1) % slideCount;
-    updateSlider();
-}, 4000);
+function startAutoScroll() {
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % slideCount;
+        updateSlider();
+    }, 5000); // Changes slide every 5 seconds
+}
 
-</script>    
+document.addEventListener('DOMContentLoaded', () => {
+    startAutoScroll();
+});
+</script>
 </body>
 </html>
